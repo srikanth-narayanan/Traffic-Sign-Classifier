@@ -59,7 +59,7 @@ class neuralLeNet(object):
     
     def _accuracy(self):
         """
-        Method to calcuate accuracy of operation
+        Helper method to calcuate accuracy of operation
         """
         self.correct_prediction = tf.equal(tf.argmax(self.logits, 1), tf.argmax(self.one_hot_y, 1))
         self.accuracy_operation = tf.reduce_mean(tf.cast(self.correct_prediction, tf.float32))
@@ -69,23 +69,29 @@ class neuralLeNet(object):
         """
         Method to evaluate loss and accuracy of the given dataset
         """
+        #setup accuracy
+        self._accuracy()
+        
         num_examples = len(X_data)
         total_accuracy = 0
         sess = tf.get_default_session()
         for offset in range(0, num_examples, BATCH_SIZE):
             batch_x, batch_y = X_data[offset:offset+BATCH_SIZE], y_data[offset:offset+BATCH_SIZE]
-            accuracy = sess.run(accuracy_operation, feed_dict={x: batch_x, y: batch_y})
+            accuracy = sess.run(self.accuracy_operation, feed_dict={x: batch_x, y: batch_y})
             total_accuracy += (accuracy * len(batch_x))
         return total_accuracy / num_examples
         
-    def convnet_setup(self, x, mu=0, sigma=0.1):
+    def convnet_setup(self, x, mu=0, sigma=0.1, inputshape=(5,5,1,6), outputclass=10):
         """
         Main lenet setup
-        """           
+        """
+        self.inputshape = inputshape
+        self.outputclass = outputclass
+        
         # Layer 1: Convolutional. Input = 32x32x1. Output = 28x28x6.#
         #############################################################
         
-        weights_ly1 = tf.Variable(tf.truncated_normal(shape=(5, 5, 1, 6), mean=mu, stddev=sigma)) # (height, width, input_depth, output_depth)
+        weights_ly1 = tf.Variable(tf.truncated_normal(shape=self.inputshape, mean=mu, stddev=sigma)) # (height, width, input_depth, output_depth)
         bias_ly1 = tf.Variable(tf.zeros(6)) # same as output1 depth
         strides1 = [1, 1, 1, 1] # (batch, height, width, depth)
         conv1 = tf.nn.conv2d(x, weights_ly1, strides = strides1, padding='VALID')
@@ -143,8 +149,8 @@ class neuralLeNet(object):
         # Layer 5: Fully Connected. Input = 84. Output = 10.#
         #####################################################
         
-        weights_ly5 = tf.Variable(tf.truncated_normal(shape=(84, 10),mean=mu, stddev=sigma)) # (height, width)
-        bias_ly5 = tf.Variable(tf.zeros(10)) # same as output2 depth
+        weights_ly5 = tf.Variable(tf.truncated_normal(shape=(84, self.outputclass),mean=mu, stddev=sigma)) # (height, width)
+        bias_ly5 = tf.Variable(tf.zeros(self.outputclass)) # same as output2 depth
         logits = tf.add(tf.matmul(full_con_ly4_act, weights_ly5), bias_ly5)
         
         return logits
