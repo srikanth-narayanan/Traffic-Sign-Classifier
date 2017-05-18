@@ -1,0 +1,2 @@
+model_checkpoint_path: "Normalised3_Lenet"
+all_model_checkpoint_paths: "Normalised3_Lenet"
