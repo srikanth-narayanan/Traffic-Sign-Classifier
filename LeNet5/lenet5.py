@@ -34,7 +34,8 @@ class neuralLeNet(object):
 
     def process_setup(self, EPOCHS=5, BATCH_SIZE=128,  mu=0, sigma=0.1,
                       inputshape=(5, 5, 1, 6), x_shape=(None, 32, 32, 1),
-                      y_shape=(None), onehot_class=10, outputclass=10):
+                      y_shape=(None), onehot_class=10, outputclass=10,
+                      dropout=1.0):
         """
         setup process variables
         """
@@ -47,6 +48,8 @@ class neuralLeNet(object):
         self.x = tf.placeholder(tf.float32, x_shape)
         self.y = tf.placeholder(tf.int32, y_shape)
         self.one_hot_y = tf.one_hot(self.y, onehot_class)
+        self.keep_prob = tf.placeholder(tf.float32)
+        self.dropout = dropout
 
     def setup_train_pipe(self, learning_rate=0.001):
         """
@@ -84,7 +87,9 @@ class neuralLeNet(object):
         sess = tf.get_default_session()
         for offset in range(0, num_examples, self.BATCH_SIZE):
             batch_x, batch_y = X_data[offset:offset + self.BATCH_SIZE], y_data[offset:offset + self.BATCH_SIZE]
-            accuracy = sess.run(self.accuracy_operation, feed_dict={self.x: batch_x, self.y: batch_y})
+            accuracy = sess.run(self.accuracy_operation,
+                                feed_dict={self.x: batch_x, self.y: batch_y,
+                                           self.keep_prob: self.dropout})
             total_accuracy += (accuracy * len(batch_x))
         return total_accuracy / num_examples
         
@@ -170,7 +175,8 @@ class neuralLeNet(object):
         # Layer 5: Fully Connected. Input = 84. Output = 10 or Output Class.#
         #####################################################################
         # (height, width)
-        weights_ly5 = tf.Variable(tf.truncated_normal(shape=(84, self.outputclass),
+        weights_ly5 = tf.Variable(tf.truncated_normal(shape=(84,
+                                                             self.outputclass),
                                                       mean=self.mu,
                                                       stddev=self.sigma))
         bias_ly5 = tf.Variable(tf.zeros(self.outputclass))
@@ -179,7 +185,7 @@ class neuralLeNet(object):
 
         return logits
 
-    def train(self, fname):
+    def train(self, fname=None):
         """
         Method to train the LeNet Model
         """
@@ -196,17 +202,15 @@ class neuralLeNet(object):
                     batch_x = self.X_train[offset:end]
                     batch_y = self.y_train[offset:end]
                     sess.run(self.training_operation,
-                             feed_dict={self.x: batch_x, self.y: batch_y})
+                             feed_dict={self.x: batch_x, self.y: batch_y,
+                                        self.keep_prob: self.dropout})
 
                 validation_accury = self.evaluate(self.X_valid, self.y_valid)
-                print("EPOCH {} ...".format(i+1))
-                print("Validation Accuracy = {:.3f}".format(validation_accury))
-                print()
-
-            self.saver.save(sess, fname)
-            print("Model saved")
+                print("EPOCH {} ...Validation Accuracy = {:.3f}".format(i+1,
+                      validation_accury))
+            if fname is not None:
+                self.saver.save(sess, fname)
+                print("Model saved")
 
 if __name__ == "__main__":
     pass
-            
-            
