@@ -89,7 +89,7 @@ class neuralLeNet(object):
             batch_x, batch_y = X_data[offset:offset + self.BATCH_SIZE], y_data[offset:offset + self.BATCH_SIZE]
             accuracy = sess.run(self.accuracy_operation,
                                 feed_dict={self.x: batch_x, self.y: batch_y,
-                                           self.keep_prob: self.dropout})
+                                           self.keep_prob: 1.0})
             total_accuracy += (accuracy * len(batch_x))
         return total_accuracy / num_examples
         
@@ -211,6 +211,16 @@ class neuralLeNet(object):
             if fname is not None:
                 self.saver.save(sess, fname)
                 print("Model saved")
+
+    def test(self, checkpoint_path):
+        """
+        Method to test the give test data set
+        """
+        with tf.Session() as sess:
+            self.saver.restore(sess, tf.train.latest_checkpoint(checkpoint_path))
+
+            self.test_accuracy = self.evaluate(self.X_test, self.y_test)
+            print("Test Accuracy = {:.3f}".format(self.test_accuracy))
 
 if __name__ == "__main__":
     pass
