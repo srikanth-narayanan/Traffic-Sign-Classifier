@@ -3,6 +3,7 @@
 [//]: # (Image References)
 [image0]: ./examples/intro.png "Introduction"
 [image1]: ./examples/lenet.png "LeNet"
+[image2]: ./examples/bar_chart_train_dataset.png "Train Distribution Set"
 [rslt_stop]: ./examples/result_stop.png "Result Probability Stop Sign"
 [rslt_priority]: ./examples/result_priority_road.png "Result Probability Priority Road"
 [rslt_50kph]: ./examples/results_50kph.png "Result Probability Speed Limit 50kph"
@@ -42,7 +43,7 @@ The data provide in the course are pickled python object which contains a dictio
 
 
 * The size of training set is 34799
-* The size of the validation set is ?
+* The size of the validation set is 4410
 * The size of test set is 12630
 * The shape of a traffic sign image is 32x32x3
 * The number of unique classes/labels in the data set is 43
@@ -51,7 +52,7 @@ The data provide in the course are pickled python object which contains a dictio
 
 Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
 
-![alt text][image1]
+![Training dataset Distribution of traffic signs][[image2]
 
 ###Design and Test a Model Architecture
 
