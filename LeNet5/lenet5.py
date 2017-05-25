@@ -19,7 +19,7 @@ class neuralLeNet(object):
     and defintions based on tensor flow to make a piple of LeNet5 convolution
     neural network
     """
-    def __init__(self, X_train, y_train, X_valid, y_valid, X_test, y_test):
+    def __init__(self, X_train, y_train, X_valid, y_valid):
         """
         Constructor for the LeNet5 architecture
         """
@@ -28,9 +28,6 @@ class neuralLeNet(object):
 
         self.X_valid = X_valid
         self.y_valid = y_valid
-
-        self.X_test = X_test
-        self.y_test = y_test
 
     def process_setup(self, EPOCHS=5, BATCH_SIZE=128,  mu=0, sigma=0.1,
                       inputshape=(5, 5, 1, 6), x_shape=(None, 32, 32, 1),
@@ -98,7 +95,7 @@ class neuralLeNet(object):
         Main lenet setup
         """
 
-        # Layer 1: Convolutional. Input = 32x32x1. Output = 28x28x6.#
+        # Layer 1: Convolutional. Input = 32x32xnn Output = 28x28x6.#
         #############################################################
 
         weights_ly1 = tf.Variable(tf.truncated_normal(shape=self.inputshape,
@@ -172,7 +169,7 @@ class neuralLeNet(object):
         # Activation of Layer4
         full_con_ly4_act = tf.nn.relu(full_con_ly4)
 
-        # Layer 5: Fully Connected. Input = 84. Output = 10 or Output Class.#
+        # Layer 5: Fully Connected. Input = 84. Output = n or Output Class.#
         #####################################################################
         # (height, width)
         weights_ly5 = tf.Variable(tf.truncated_normal(shape=(84,
@@ -212,14 +209,14 @@ class neuralLeNet(object):
                 self.saver.save(sess, fname)
                 print("Model saved")
 
-    def test(self, checkpoint_path):
+    def test(self, checkpoint_path, X_test, y_test):
         """
         Method to test the give test data set
         """
         with tf.Session() as sess:
             self.saver.restore(sess, tf.train.latest_checkpoint(checkpoint_path))
 
-            self.test_accuracy = self.evaluate(self.X_test, self.y_test)
+            self.test_accuracy = self.evaluate(X_test, y_test)
             print("Test Accuracy = {:.3f}".format(self.test_accuracy))
 
 if __name__ == "__main__":

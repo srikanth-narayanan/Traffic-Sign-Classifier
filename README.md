@@ -1,32 +1,41 @@
 #**Traffic Sign Recognition** 
 
-##Writeup Template
+[//]: # (Image References)
+[image0]: ./examples/intro.png "Introduction"
+[image1]: ./examples/lenet.png "LeNet"
+[rslt_stop]: ./examples/result_stop.png "Result Probability Stop Sign"
+[rslt_priority]: ./examples/result_priority_road.png "Result Probability Priority Road"
+[rslt_50kph]: ./examples/results_50kph.png "Result Probability Speed Limit 50kph"
+[rslt_roadwork]: ./examples/rresults_road_Work.png "Result Probability Road Work"
+[rslt_General_Caut]: ./examples/result_generalcaution.png "Result Probability General Caution"
 
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+-> ![Introduction][image0] <-
 
+This project builds a Traffic sign recognition classifier that is based on the [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset). In this project a [LeNet-5](http://yann.lecun.com/exdb/lenet/)  architecture propsed by Yann LeCun. This architecture is a conventional neural netwrok that was designed to recogonise the hand written visual patterns from the image with minimal preprocessing.
+
+-> ![LeNet][image] <-
+
+Source: http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf
 ---
 
-**Build a Traffic Sign Recognition Project**
 
-The goals / steps of this project are the following:
-* Load the data set (see below for links to the project data set)
-* Explore, summarize and visualize the data set
-* Design, train and test a model architecture
-* Use the model to make predictions on new images
-* Analyze the softmax probabilities of the new images
-* Summarize the results with a written report
+the implemetnation of Traffic sign classifier based on the LeNet architecure which is a convolution neural network. The following steps are used to create the classfier, pipeline and training process.
+
+- Load the data.
+- Understanding and Visualising the data.
+- Define training set, validation set and test set.
+- Design of Pipeline.
+- Training of Network.
+- Run Benchmark model without any preprocessing.
+- Preprocessing the data for usage.
+    - Use of different normalisation methods.
+    - Apply different image augmentation methods.
+- Measure of system performance.
+- Tunning of system performance.
+- Run classifier on Test data.
 
 
-[//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -84,19 +93,22 @@ The difference between the original data set and the augmented data set is the f
 
 My final model consisted of the following layers:
 
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
- 
-
+| Layer           	| Shape    	| Description               	|
+|-----------------	|----------	|---------------------------	|
+| Input           	| 32x32x3  	| RGB Image                 	|
+| Convolution     	| 28x28x6  	| 1x1 Stride, Valid Padding 	|
+| Activation      	| 28x28x6  	| ReLU                      	|
+| Max Pooling     	| 14x14x6  	| 2x2 Stride, Valid Padding 	|
+| Convolution     	| 10x10x16 	| 1x1 Stride, Valid Padding 	|
+| Activation      	| 10x10x16 	| ReLU                      	|
+| Max Pooling     	| 5x5x16   	| 2x2 Stride, Valid Padding 	|
+| Flatten         	| 400      	|                           	|
+| Fully Connected 	| 120      	|                           	|
+| Activation      	| 120      	| ReLU                      	|
+| Fully Connected 	| 84       	|                           	|
+| Activation      	| 84       	| ReLU                      	|
+| Fully Connected 	| 43       	|                           	|
+| Softmax         	| 43       	| ReLU                      	|
 
 ####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
@@ -139,33 +151,39 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Speed Limit 50 Kmph 	| Speed Limit 50 Kmph							| 
+| General Caution		| General Caution								|
+| Priority Road			| Priority Road                 				|
+| Road Work	      		| Pedestrians					 				|
+| Stop Sign 			| Stop Sign         							|
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is located in the 119, 121 and 123rd resultcell of the Ipython notebook.
 
 For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
+| .60         			| Speed Limit 50 KMPH							| 
+| .20     				| Priority Road									|
+| .05					| 											|
 | .04	      			| Bumpy Road					 				|
 | .01				    | Slippery Road      							|
 
+![Softmax Probability of Speed Limit 50kph][rslt_50kph]
 
-For the second image ... 
+![Softmax Probability of General Caution][rslt_General_Caut]
 
-### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
-####1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
+![Softmax Probability of Priority Road][rslt_priority]
+
+![Softmax Probability of Roadwork][rslt_roadwork]
+
+![Softmax Probability of Stop][rslt_stop]
+
+
 
 
