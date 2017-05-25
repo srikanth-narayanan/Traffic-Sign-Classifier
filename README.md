@@ -6,7 +6,7 @@
 [rslt_stop]: ./examples/result_stop.png "Result Probability Stop Sign"
 [rslt_priority]: ./examples/result_priority_road.png "Result Probability Priority Road"
 [rslt_50kph]: ./examples/results_50kph.png "Result Probability Speed Limit 50kph"
-[rslt_roadwork]: ./examples/rresults_road_Work.png "Result Probability Road Work"
+[rslt_roadwork]: ./examples/results_road_Work.png "Result Probability Road Work"
 [rslt_General_Caut]: ./examples/result_generalcaution.png "Result Probability General Caution"
 
 -> ![Introduction][image0] <-
@@ -34,7 +34,7 @@ The following steps are used to create the classfier, pipeline and training proc
 - Run classifier on Test data.
 
 
-### Data Set Summary & Exploration
+###1. Data Set Summary & Exploration
 
 The given data set is database of German traffic signs collected for a project run by the institute for Informatics [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset).
 
@@ -47,7 +47,7 @@ The data provide in the course are pickled python object which contains a dictio
 * The shape of a traffic sign image is 32x32x3
 * The number of unique classes/labels in the data set is 43
 
-#### Exploratory visualization of the dataset.
+####2. Exploratory visualization of the dataset.
 
 Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
 
@@ -81,7 +81,7 @@ The difference between the original data set and the augmented data set is the f
 My final model consisted of the following layers:
 
 | Layer           	| Shape    	| Description               	|
-|-----------------	|----------	|---------------------------	|
+|:----------------:	|:---------:|:--------------------------:	|
 | Input           	| 32x32x3  	| RGB Image                 	|
 | Convolution     	| 28x28x6  	| 1x1 Stride, Valid Padding 	|
 | Activation      	| 28x28x6  	| ReLU                      	|
@@ -153,21 +153,62 @@ The code for making predictions on my final model is located in the 119, 121 and
 
 For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Speed Limit 50 KMPH							| 
-| .20     				| Priority Road									|
-| .05					| 											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| Prediction            | Probability   |
+|:---------------------:|:-------------:|
+| Speed limit (50km/h)  | 0.99996674061 |
+| Speed limit (80km/h)  | 0.00003324157 |
+| Speed limit (100km/h) | 0.00000000000 |
+| Speed limit (30km/h)  | 0.00000000000 |
+| Speed limit (60km/h)  | 0.00000000000 |
 
 ![Softmax Probability of Speed Limit 50kph][rslt_50kph]
 
+Second Image
+
+| Prediction           | Probability   |
+|:--------------------:|:-------------:|
+| Traffic signals      | 0.99986636639 |
+| General caution      | 0.00013365022 |
+| Pedestrians          | 0.00000000000 |
+| Speed limit (20km/h) | 0.00000000000 |
+| Speed limit (30km/h) | 0.00000000000 |
+
+
 ![Softmax Probability of General Caution][rslt_General_Caut]
+
+Third Image
+
+| Prediction           | Probability  |
+|:--------------------:|:------------:|
+| Priority road        | 1.0000000000 |
+| Speed limit (20km/h) | 0.0000000000 |
+| Speed limit (30km/h) | 0.0000000000 |
+| Speed limit (50km/h) | 0.0000000000 |
+| Speed limit (60km/h) | 0.0000000000 |
 
 ![Softmax Probability of Priority Road][rslt_priority]
 
+Fourth Image
+
+| Prediction                            | Probability |
+|:-------------------------------------:|:-----------:|
+| Road work                             | 1.000000000 |
+| Right-of-way at the next intersection | 0.000000000 |
+| Turn right ahead                      | 0.000000000 |
+| Children crossing                     | 0.000000000 |
+| Road narrows on the right             | 0.000000000 |
+
 ![Softmax Probability of Roadwork][rslt_roadwork]
+
+Fifth Image
+
+| Prediction                                   | Probability   |
+|:--------------------------------------------:|:-------------:|
+| Stop                                         | 0.99997258186 |
+| No entry                                     | 0.00002637984 |
+| Speed limit (120km/h)                        | 0.00000104451 |
+| No passing                                   | 0.00000000176 |
+| No passing for vehicles over 3.5 metric tons | 0.00000000002 |
 
 ![Softmax Probability of Stop][rslt_stop]
 
