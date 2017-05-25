@@ -1,0 +1,2 @@
+model_checkpoint_path: "Final_TSR_Model_Update"
+all_model_checkpoint_paths: "Final_TSR_Model_Update"

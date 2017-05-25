@@ -11,15 +11,14 @@
 
 -> ![Introduction][image0] <-
 
-This project builds a Traffic sign recognition classifier that is based on the [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset). In this project a [LeNet-5](http://yann.lecun.com/exdb/lenet/)  architecture propsed by Yann LeCun. This architecture is a conventional neural netwrok that was designed to recogonise the hand written visual patterns from the image with minimal preprocessing.
+This project builds a Traffic sign recognition classifier to identify German traffic sign. In this project a [LeNet-5](http://yann.lecun.com/exdb/lenet/)  architecture propsed by Yann LeCun. This architecture is a conventional neural netwrok that was designed to recogonise the hand written visual patterns from the image with minimal preprocessing.
 
 -> ![LeNet][image] <-
 
 Source: http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf
 ---
 
-
-the implemetnation of Traffic sign classifier based on the LeNet architecure which is a convolution neural network. The following steps are used to create the classfier, pipeline and training process.
+The following steps are used to create the classfier, pipeline and training process.
 
 - Load the data.
 - Understanding and Visualising the data.
@@ -35,32 +34,20 @@ the implemetnation of Traffic sign classifier based on the LeNet architecure whi
 - Run classifier on Test data.
 
 
+### Data Set Summary & Exploration
+
+The given data set is database of German traffic signs collected for a project run by the institute for Informatics [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset).
+
+The data provide in the course are pickled python object which contains a dictionary of images and its labels. The data is loaded using the pickle module and allocated as original data set. The data is first analysed to understand the image size, type and dataset information.
 
 
-## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
-
----
-###Writeup / README
-
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
-
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
-
-###Data Set Summary & Exploration
-
-####1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
-
-I used the pandas library to calculate summary statistics of the traffic
-signs data set:
-
-* The size of training set is ?
+* The size of training set is 34799
 * The size of the validation set is ?
-* The size of test set is ?
-* The shape of a traffic sign image is ?
-* The number of unique classes/labels in the data set is ?
+* The size of test set is 12630
+* The shape of a traffic sign image is 32x32x3
+* The number of unique classes/labels in the data set is 43
 
-####2. Include an exploratory visualization of the dataset.
+#### Exploratory visualization of the dataset.
 
 Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
 
