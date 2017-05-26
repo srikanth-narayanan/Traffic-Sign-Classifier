@@ -121,7 +121,9 @@ The following is an example of an original image and an augmented image:
 The difference between the original data set and the augmented data set is the following ... 
 
 
-####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+#### 2. Model Architecture
+
+I used the existing architecture of LeNet5. The only modification was made in the number of input as 32x32x3 and the output classes as 43.
 
 My final model consisted of the following layers:
 
@@ -142,27 +144,41 @@ My final model consisted of the following layers:
 | Fully Connected 	| 43       	|                            |
 | Softmax         	| 43       	| ReLU                       |
 
-####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
+#### 3. Training Model
 
-To train the model, I used an ....
+Initialy the model was trained with no change in the hyper parameters from the LeNet lab exercise. I wanted to estabish a baseline score on how the model performed.
 
-####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
+I performed trail and error method to approach on a final value of the hyper parameters as below.
+
+- Epoch			100
+- Batch size 	128
+- mu 			0
+- Sigma 		0.1
+- Dropout 		0.5 (50%)
+- Adam Optimiser
+- Learning Rate 0.001
+
+
+#### 4. Acheiving > 0.93% accuracy
+
+After the final training run the model was able to reach the desired accuracy level
 
 My final model results were:
-* validation set accuracy of ? 
-* test set accuracy of ?
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+- validation set accuracy of 0.949
+- test set accuracy of 0.845
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
+
+The model was originally built with LeNet 5 architecture, because it's a proven architecture for character recogonition. The traffic signs, when looked at very smaller feature level (filters for the models) are similar. 
+
+The intial problems faced by the model was overfitting for the given dataset. The model was not able to reach a higher accuracy because the original dataset did not capture worse case possibilities. Image augumentation and normalisation and addition of dataset improved the model performance.
+
+Modifying the learning rate of the optimiser and the addition of dropouts 50% made the model robust.
+
+As a final run I adjusted the batch size and the number of epochs for the model to reach a better accuracy in the validation.
+
+The model performed as expected, as the test set score and new test image from the web reched similar accuracy.
+
  
 
 ### Test a Model on New Images
