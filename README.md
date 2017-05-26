@@ -17,10 +17,7 @@
 [Translate]: ./examples/Translate.png "Translate"
 [test_image]: ./examples/augumented_test_image.png "Augumented Image"
 
-<p align="center"> 
-<img src="./examples/intro.png">
-</p>
-![Introduction][image0]
+#+html: <p align="center"><img src="./examples/intro.png" /></p>
 
 This project builds a Traffic sign recognition classifier to identify German traffic sign. In this project a [LeNet-5](http://yann.lecun.com/exdb/lenet/)  architecture propsed by Yann LeCun. This architecture is a conventional neural netwrok that was designed to recogonise the hand written visual patterns from the image with minimal preprocessing.
 
