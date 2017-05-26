@@ -1,5 +1,3 @@
-#**Traffic Sign Recognition** 
-
 [//]: # (Image References)
 [image0]: ./examples/intro.png "Introduction"
 [image1]: ./examples/lenet.png "LeNet"
@@ -17,14 +15,15 @@
 [Translate]: ./examples/Translate.png "Translate"
 [test_image]: ./examples/augumented_test_image.png "Augumented Image"
 
-#+html: <p align="center"><img src="./examples/intro.png" /></p>
+
+# Traffic Sign Recognition
+
+![Intro][image0]
 
 This project builds a Traffic sign recognition classifier to identify German traffic sign. In this project a [LeNet-5](http://yann.lecun.com/exdb/lenet/)  architecture propsed by Yann LeCun. This architecture is a conventional neural netwrok that was designed to recogonise the hand written visual patterns from the image with minimal preprocessing.
 
-[LeNet][image]
+![LeNet][image1]
 
-Source: http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf
----
 
 The following steps are used to create the classfier, pipeline and training process.
 
@@ -151,9 +150,9 @@ If a well known architecture was chosen:
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
  
 
-###Test a Model on New Images
+### Test a Model on New Images
 
-####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+#### 1. Test Images and ideas behind choosing them
 
 The five traffic sign that I choose to test on the model are a speed limit, general caution, priority road, road work and stop signs. The following is the test images after rescaling and augumentation.
 
@@ -169,26 +168,27 @@ The road work was the favourite choice road sign becasue in reality there are us
 
 The fifth image is a stop sign. This also has unique octogonal shape, with stop letters as characters. In general the LeNet 5 architecture performs very well for letter. Hence this is an easy choice for the model to predict.
 
-####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
+#### 2. Model Predictions
 
-Here are the results of the prediction:
-
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Speed Limit 50 Kmph 	| Speed Limit 50 Kmph							| 
-| General Caution		| General Caution								|
-| Priority Road			| Priority Road                 				|
-| Road Work	      		| Pedestrians					 				|
-| Stop Sign 			| Stop Sign         							|
+The following are the results of the prediction from the model. 
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+| Image			        |     Prediction	       | 
+|:---------------------:|:------------------------:| 
+| Speed Limit 50 Kmph 	| Speed Limit 50 Kmph	   | 
+| General Caution		| General Caution		   |
+| Priority Road			| Priority Road            |
+| Road Work	      		| Pedestrians			   |
+| Stop Sign 			| Stop Sign         	   |
 
-####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 119, 121 and 123rd resultcell of the Ipython notebook.
+The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of 84.5%.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+#### 3. Softmax Probabilites and Understanding Predictions
+
+The code for making predictions on my final model is located in the last 4 cells 121, 22 and 41st result cell of the Ipython notebook.
+
+The first image, the model is very sure that this is a speed limit of 50 Kmph (probability of 0.99), and the image does contain a 50 Kmph sign. The top five soft max probabilities are below. There was significantly low chance this image could be 80 kmph speed sign. The augumentaion of the image cleared up the watermark.
 
 | Prediction            | Probability   |
 |:---------------------:|:-------------:|
@@ -200,7 +200,7 @@ For the first image, the model is relatively sure that this is a stop sign (prob
 
 ![Softmax Probability of Speed Limit 50kph][rslt_50kph]
 
-Second Image
+The second image was general caution but the model incorrectly identified as traffic signal with very high confidence. This could potential be due to the close resemblence of General caution and traffic signal signs. More learning situations improvement in image augumentation can help address the situation.
 
 | Prediction           | Probability   |
 |:--------------------:|:-------------:|
@@ -213,7 +213,7 @@ Second Image
 
 ![Softmax Probability of General Caution][rslt_General_Caut]
 
-Third Image
+The model was 100 % confident that the third image was Priority road and it correct predicted this traffic sign. This might be due to the very unique shape and charectistics of this traffic sign.
 
 | Prediction           | Probability  |
 |:--------------------:|:------------:|
@@ -225,7 +225,7 @@ Third Image
 
 ![Softmax Probability of Priority Road][rslt_priority]
 
-Fourth Image
+The fourth image was correctly predicted as with probability of 1.0 as road work. This was an intresting choice as this sign had chances to be predicted wrong due to the back ground of the image and other similar signs.
 
 | Prediction                            | Probability |
 |:-------------------------------------:|:-----------:|
@@ -237,7 +237,7 @@ Fourth Image
 
 ![Softmax Probability of Roadwork][rslt_roadwork]
 
-Fifth Image
+The fifth image was the stop sign and model predicted with very high certainity that it was a stop sign.
 
 | Prediction                                   | Probability   |
 |:--------------------------------------------:|:-------------:|
