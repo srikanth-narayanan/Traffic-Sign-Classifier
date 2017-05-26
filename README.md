@@ -21,7 +21,7 @@
  
 ![Intro][image0]
  
-This project builds a Traffic sign recognition classifier to identify German traffic sign. In this project a [LeNet-5](http://yann.lecun.com/exdb/lenet/)  architecture proposed by Yann LeCun. This architecture is a conventional neural network that was designed to recognize the handwritten visual patterns from the image with minimal preprocessing.
+This project builds a Traffic sign recognition classifier to identify German traffic sign. In this project a [LeNet-5](http://yann.lecun.com/exdb/lenet/)  architecture proposed by Yann LeCun was used as foundation. This architecture is a conventional neural network that was designed to recognize the handwritten visual patterns from the image with minimal preprocessing.
  
 ![LeNet][image1]
  
@@ -38,7 +38,7 @@ The following steps are used to create the classifier, pipeline and training pro
     - Use of different normalisation methods.
     - Apply different image augmentation methods.
 - Measure of system performance.
-- Tuning of system performance.
+- Tuning of hyper parameters
 - Run classifier on Test data.
  
  
@@ -57,7 +57,7 @@ The data provide in the course are pickled python object which contains a dictio
  
 #### 2. Exploratory visualization of the dataset.
  
-Understanding the dataset is key step to build a robust model. The training set consist of several sets of traffic and understanding how they are distributed was the initial step. The following is a bar chart showing the training data set. It is very evident that some signs have a larger dataset when compared to others. 
+ The training set consist of several sets of traffic signs and understanding how they are distributed was the initial step. The following is a bar chart showing the training data set. It is very evident that some signs have a larger dataset when compared to others. 
  
 ![Training dataset Distribution of traffic signs][image2]
  
@@ -65,7 +65,7 @@ Understanding the dataset is key step to build a robust model. The training set 
  
 #### 1. Pre processing techniques
  
-I decided the preprocessing techniques in the three steps.
+The following are three pre processing techniques used in the model.
  
 1. Image Augmentation
 2. Colour Space
@@ -73,13 +73,13 @@ I decided the preprocessing techniques in the three steps.
  
 ##### Image Augmentation
  
-In real life scenario a camera mounted on different vehicles such as passenger car or truck has different perspective of the traffic sign images. In order address such a scenario, three image augmentation methods were tested
+In real life scenario a camera mounted on different vehicles such as passenger car or truck has different perspective of the traffic sign images. Three image augmentation methods were tested
  
 1. Image Translation - Needed as the traffic sign could be partially blocked in the field of view of the camera. The effect of translation is illustrated by an example image before and after the pre processing.
  
 ![Translate Colour Space][Translate]
  
-2. Image Rotation - Mild rotation is needed as there situation the traffic sign is seen from uneven road gradient and traffic sign damaged by weather conditions. The effect of Rotation is illustrated by an example image before and after the pre processing.
+2. Image Rotation - Mild rotation is needed as there are situations the traffic sign is seen from an uneven road gradient or traffic sign damaged by weather conditions. The effect of Rotation is illustrated by an example image before and after the pre processing.
  
 ![Rotate Colour Space][Rotate]
  
@@ -93,7 +93,7 @@ In real life scenario a camera mounted on different vehicles such as passenger c
  
 ![Gray Scale][Grayscale]
  
-2. HSV and YUV - Other colour space attempted to improve the features to standout for the model to be more roust in training.
+2. HSV and YUV - Other colour space attempted to improve the features to standout for the model to be more robust in training.
  
 ![HSV Colour Space][HSV]
  
@@ -106,13 +106,13 @@ The different colour space did not yield promising results as expected. This may
  
 The final step in the pre processing methods is to identify normalisation methods. Two different normalisation methods was experimented.
  
-1. Feature Score - This normalisation is one of the most common and work better when the data is normally distributed.
+1. Feature Score - This normalisation is one of the most common and works better when the data is normally distributed.
  
 2. Min Max Scaler or Feature Scaling - Feature scaling is used to bring all values into a range of [0,1]. It is also called unity based normalisation.
  
 The feature score method performed better than min max scaler and hence it was used in the final preprocessing.
  
-In order to build a robust model, the training data set should also be robust. Hence I augmented the entire training set and concatenated them to make double size data, which have images that are blurry, unsharp but also an equivalent preprocessed alias. The entire data set was final step was to normalise the entire dataset with feature score normalisation.
+In order to build a robust model, the training data set should also be robust. The training set was augmented and concatenated to make twice the size of training data, which have images that are blurry, unsharp but also an equivalent preprocessed alias.
  
 The following is an example of an original image and an augmented image:
  
@@ -123,7 +123,7 @@ The difference between the original data set and the augmented data set is the f
  
 #### 2. Model Architecture
  
-I used the existing architecture of LeNet 5. The only modification was made in the number of input as 32x32x3 and the output classes as 43.
+I used the existing architecture of LeNet 5. A modification was made in the number of input as 32x32x3 and the output classes as 43.
  
 My final model consisted of the following layers:
  
@@ -171,9 +171,11 @@ My final model results were:
 - test set accuracy of 0.845
  
  
-The model was originally built with LeNet 5 architecture, because it's a proven architecture for character recognition. The traffic signs, when looked at very smaller feature level (filters for the models) are similar. 
+The model was originally built with LeNet 5 architecture, because it's a proven architecture for character recognition. The traffic signs, when looked at very smaller feature level (filters with a stride of 1x1) share commonality with characters.
  
-The initial problems faced by the model was overfitting for the given dataset. The model was not able to reach a higher accuracy because the original dataset did not capture worst case possibilities. Image augmentation and normalisation and addition of dataset improved the model performance.
+The initial problems faced by the model was overfitting for the given dataset. 
+
+The model was not able to reach a higher accuracy because the original dataset did not capture worst case possibilities. Image augmentation and normalisation and addition of dataset improved the model performance.
  
 Modifying the learning rate of the optimiser and the addition of dropouts 50% made the model robust.
  
