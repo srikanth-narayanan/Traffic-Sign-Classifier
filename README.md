@@ -107,7 +107,7 @@ The final step in the pre processing methods is to identify normalisation method
 
 1. Feature Score - This normalisation is one of the most common and work better when the data is normally distributed.
 
-\frac{X - \mu}{\sigma}
+(X - \mu)\div \sigma 
 
 I decided to generate additional data because ... 
 
