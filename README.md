@@ -116,7 +116,7 @@ In order to build a robust model, the training data set should also be robust. T
  
 The following is an example of an original image and an augmented image:
  
-![Augment][augument]
+![Augment][augment]
  
 The difference between the original data set and the augmented data set is the following ... 
  
