@@ -101,13 +101,13 @@ In real life scenario a camera mounted on different vehicles such as passgener c
 
 Surpsiringly the different colour space did not yield promising results as expected.
 
+##### Normalisation
 
+The final step in the pre processing methods is to identify normalisation methods. Two differnt normalisation methods was experimented.
 
+1. Feature Score - This normalisation is one of the most common and work better when the data is normally distributed.
 
-
-
-
-As a last step, I normalized the image data because ...
+\frac{X - \mu}{\sigma}
 
 I decided to generate additional data because ... 
 
