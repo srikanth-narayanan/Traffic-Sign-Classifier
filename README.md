@@ -1,5 +1,5 @@
 [//]: # (Image References)
-[image0]: ./examples/intro.png "Introduction"
+[image0]: ./examples/Intro.png "Introduction"
 [image1]: ./examples/lenet.png "LeNet"
 [image2]: ./examples/bar_chart_train_dataset.png "Train Distribution Set"
 [rslt_stop]: ./examples/result_stop.png "Result Probability Stop Sign"
@@ -41,7 +41,7 @@ The following steps are used to create the classfier, pipeline and training proc
 - Run classifier on Test data.
 
 
-###1. Data Set Summary & Exploration
+### 1. Data Set Summary & Exploration
 
 The given data set is database of German traffic signs collected for a project run by the institute for Informatics [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset).
 
@@ -54,43 +54,58 @@ The data provide in the course are pickled python object which contains a dictio
 * The shape of a traffic sign image is 32x32x3
 * The number of unique classes/labels in the data set is 43
 
-####2. Exploratory visualization of the dataset.
+#### 2. Exploratory visualization of the dataset.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+Understanding the dataset is key step to build a robust model. The training set consist of several sets of traffic and understanding how they are distributed was the initial step. The following is a bar chart showing the training data set. It is very evident that some signs have a larger dataset when compared to others. 
 
 ![Training dataset Distribution of traffic signs][image2]
 
-###Design and Test a Model Architecture
+### Design and Test a Model Architecture
 
-####1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+#### 1. Pre processing techniques
 
-As a first step, I decided to convert the images to grayscale because ...
+I decided the preprocessing techniques in the three steps.
 
-Here is an example of a traffic sign image before and after grayscaling.
+1. Image Augumentation
+2. Colour Space
+3. Normalisation
 
-[Grayscale]: ./examples/grayscale.png "Grayscale"
-[HSV]: ./examples/HSV.png "HSV"
-[YUV]: ./examples/YUV.png "YUV"
-[Rotate]: ./examples/Rotate.png "Rotate"
-[Enhance]: ./examples/Enhance.png "Enhance"
-[Translate]: ./examples/Translate.png "Translate"
+##### Image Augumentation
+
+In real life scenario a camera mounted on different vehicles such as passgener car or truck has differnt perpective of the traffic sign images. In order address such a scenario, three image augumentation methods were tested
+
+1. Image Translation - Needed as the traffic sign could be partially blocked in the field of view of the camera. The effect of translation is illustrated by an example image before and after the pre processing.
+
+![Translate Colour Space][Translate]
+
+2. Image Rotation - Mild rotation is needed as there situation the traffic sign is seen from uneven road gradient and traffic sign damaged by weather conditions. The effect of Rotation is illustrated by an example image before and after the pre processing.
+
+![Rotate Colour Space][Rotate]
+
+3. Image Enhancement - The camera records the images in combination with different lighting conditions, exposure etc., The image need not be always sharp. A gaussian blur filter is a very effective method to reduce noise and smoothen the given image. Th following is an example of the enhancement on a traffic sign.
+
+![Enhance Colour Space][Enhance]
+
+##### Colour Space
+
+1. Grayscale - In the original paper decribing the LeNet Architecture, Yann LeCun described that grayscale as effective means to improve the model performance in training for a feature but also faster training as the matrix is simplied. The training set was converted to grayscale.
 
 ![Gray Scale][Grayscale]
 
+2. HSV and YUV - Other colour space attempted to improve the features to standout for the model to be more roust in training.
 
 ![HSV Colour Space][HSV]
 
 
 ![YUV Colour Space][YUV]
 
-
-![Rotate Colour Space][Rotate]
-
-
-![Enhance Colour Space][Enhance]
+Surpsiringly the different colour space did not yield promising results as expected.
 
 
-![Translate Colour Space][Translate]
+
+
+
+
 
 As a last step, I normalized the image data because ...
 
@@ -109,22 +124,22 @@ The difference between the original data set and the augmented data set is the f
 
 My final model consisted of the following layers:
 
-| Layer           	| Shape    	| Description               	|
-|:----------------:	|:---------:|:--------------------------:	|
-| Input           	| 32x32x3  	| RGB Image                 	|
-| Convolution     	| 28x28x6  	| 1x1 Stride, Valid Padding 	|
-| Activation      	| 28x28x6  	| ReLU                      	|
-| Max Pooling     	| 14x14x6  	| 2x2 Stride, Valid Padding 	|
-| Convolution     	| 10x10x16 	| 1x1 Stride, Valid Padding 	|
-| Activation      	| 10x10x16 	| ReLU                      	|
-| Max Pooling     	| 5x5x16   	| 2x2 Stride, Valid Padding 	|
-| Flatten         	| 400      	|                           	|
-| Fully Connected 	| 120      	|                           	|
-| Activation      	| 120      	| ReLU                      	|
-| Fully Connected 	| 84       	|                           	|
-| Activation      	| 84       	| ReLU                      	|
-| Fully Connected 	| 43       	|                           	|
-| Softmax         	| 43       	| ReLU                      	|
+| Layer           	| Shape    	| Description                |
+|:----------------:	|:---------:|:--------------------------:|
+| Input           	| 32x32x3  	| RGB Image                  |
+| Convolution     	| 28x28x6  	| 1x1 Stride, Valid Padding  |
+| Activation      	| 28x28x6  	| ReLU                       |
+| Max Pooling     	| 14x14x6  	| 2x2 Stride, Valid Padding  |
+| Convolution     	| 10x10x16 	| 1x1 Stride, Valid Padding  |
+| Activation      	| 10x10x16 	| ReLU                       |
+| Max Pooling     	| 5x5x16   	| 2x2 Stride, Valid Padding  |
+| Flatten         	| 400      	|                            |
+| Fully Connected 	| 120      	|                            |
+| Activation      	| 120      	| ReLU                       |
+| Fully Connected 	| 84       	|                            |
+| Activation      	| 84       	| ReLU                       |
+| Fully Connected 	| 43       	|                            |
+| Softmax         	| 43       	| ReLU                       |
 
 ####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
@@ -133,7 +148,6 @@ To train the model, I used an ....
 ####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy of ?
 * validation set accuracy of ? 
 * test set accuracy of ?
 
@@ -160,15 +174,17 @@ The five traffic sign that I choose to test on the model are a speed limit, gene
 
 The speed sign was chooses for two reason. This is the sign that model can be frequently subjected and with various number sign with similar characteristics, the model can predict it incorrectly. For example the image with speed sign 50 could appear as 80 with right level of noise and angle. The image also had a watermark, which could potential reduce the softmax probabilites
 
-The seconds image was "General Caution". This is one of the intresting choices because there many similar looking signs in the dataset. For example Road narrows left, Road Narrows Right or Traffic Signal could appear as General caution sign to a model. The exclamation feature in the center of the triangle has similarity to many other warning signs.
+The seconds image was "General Caution". This was one of the intresting choices because there many similar looking signs in the dataset. For example Road narrows left, Road Narrows Right or Traffic Signal could appear as General caution sign to a model. The exclamation feature in the center of the triangle has similarity to many other warning signs.
 
-The priority traffic sign is one the unique in the data set. A priority sign and end of priorty sign are the only two that has a Rhombus shape. double border and two colour. This sign was probably the most unique for the model to predict. This sign also had part of the roof of the building that would have containminated the prediction with other signs.
+The priority traffic sign was one the unique in the data set. A priority sign and end of priorty sign are the only two that has a Rhombus shape. double border and two colour. This sign was probably the most unique for the model to predict. This sign also had part of the roof of the building that would have containminated the prediction with other signs.
 
 The road work was the favourite choice road sign becasue in reality there are usually multiple sign combined in a construciton zone. In the test image there is barricade that could be seen as level crossing sign. The road work image as share its similarity of a person in the center with pedestrians and childrens crossing sign.
 
 The fifth image is a stop sign. This also has unique octogonal shape, with stop letters as characters. In general the LeNet 5 architecture performs very well for letter. Hence this is an easy choice for the model to predict.
 
+
 #### 2. Model Predictions
+
 
 The following are the results of the prediction from the model. 
 
@@ -176,15 +192,17 @@ The following are the results of the prediction from the model.
 | Image			        |     Prediction	       | 
 |:---------------------:|:------------------------:| 
 | Speed Limit 50 Kmph 	| Speed Limit 50 Kmph	   | 
-| General Caution		| General Caution		   |
+| General Caution		| Traffic Signal     	   |
 | Priority Road			| Priority Road            |
-| Road Work	      		| Pedestrians			   |
+| Road Work	      		| Road Work 			   |
 | Stop Sign 			| Stop Sign         	   |
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of 84.5%.
 
+
 #### 3. Softmax Probabilites and Understanding Predictions
+
 
 The code for making predictions on my final model is located in the last 4 cells 121, 22 and 41st result cell of the Ipython notebook.
 
