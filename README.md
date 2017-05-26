@@ -146,6 +146,8 @@ My final model consisted of the following layers:
 
 #### 3. Training Model
 
+The pipeline was implemented as Python class that enabled to instantiate differnt objects and experment with hyper parameters.
+
 Initialy the model was trained with no change in the hyper parameters from the LeNet lab exercise. I wanted to estabish a baseline score on how the model performed.
 
 I performed trail and error method to approach on a final value of the hyper parameters as below.
