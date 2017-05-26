@@ -15,7 +15,7 @@
 [Rotate]: ./examples/Rotate.png "Rotate"
 [Enhance]: ./examples/Enhance.png "Enhance"
 [Translate]: ./examples/Translate.png "Translate"
-
+[test_image]: ./examples/augumented_test_image.png "Augumented Image"
 
 -> ![Introduction][image0] <-
 
@@ -59,7 +59,7 @@ The data provide in the course are pickled python object which contains a dictio
 
 Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
 
-![Training dataset Distribution of traffic signs][[image2]
+![Training dataset Distribution of traffic signs][image2]
 
 ###Design and Test a Model Architecture
 
@@ -155,12 +155,19 @@ If a well known architecture was chosen:
 
 ####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+The five traffic sign that I choose to test on the model are a speed limit, general caution, priority road, road work and stop signs. The following is the test images after rescaling and augumentation.
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![Augumented Road Signs][test_image]
 
-The first image might be difficult to classify because ...
+The speed sign was chooses for two reason. This is the sign that model can be frequently subjected and with various number sign with similar characteristics, the model can predict it incorrectly. For example the image with speed sign 50 could appear as 80 with right level of noise and angle. The image also had a watermark, which could potential reduce the softmax probabilites
+
+The seconds image was "General Caution". This is one of the intresting choices because there many similar looking signs in the dataset. For example Road narrows left, Road Narrows Right or Traffic Signal could appear as General caution sign to a model. The exclamation feature in the center of the triangle has similarity to many other warning signs.
+
+The priority traffic sign is one the unique in the data set. A priority sign and end of priorty sign are the only two that has a Rhombus shape. double border and two colour. This sign was probably the most unique for the model to predict. This sign also had part of the roof of the building that would have containminated the prediction with other signs.
+
+The road work was the favourite choice road sign becasue in reality there are usually multiple sign combined in a construciton zone. In the test image there is barricade that could be seen as level crossing sign. The road work image as share its similarity of a person in the center with pedestrians and childrens crossing sign.
+
+The fifth image is a stop sign. This also has unique octogonal shape, with stop letters as characters. In general the LeNet 5 architecture performs very well for letter. Hence this is an easy choice for the model to predict.
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
