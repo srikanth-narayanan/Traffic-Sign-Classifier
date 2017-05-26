@@ -14,6 +14,7 @@
 [Enhance]: ./examples/Enhance.png "Enhance"
 [Translate]: ./examples/Translate.png "Translate"
 [test_image]: ./examples/augumented_test_image.png "Augumented Image"
+[augument]: ./examples/augument.png "Augument"
 
 
 # Traffic Sign Recognition
@@ -99,7 +100,7 @@ In real life scenario a camera mounted on different vehicles such as passgener c
 
 ![YUV Colour Space][YUV]
 
-Surpsiringly the different colour space did not yield promising results as expected.
+Surpsiringly the different colour space did not yield promising results as expected. This may be possibly that the small features are better represented in RGB space than gray scale for the model.
 
 ##### Normalisation
 
@@ -107,15 +108,15 @@ The final step in the pre processing methods is to identify normalisation method
 
 1. Feature Score - This normalisation is one of the most common and work better when the data is normally distributed.
 
-(X - \mu)\div \sigma 
+2. Min Max Scaler or Feature Scaling - Feature scaling is used to bring all values in to a range of [0,1]. It is also called unity based normalisation.
 
-I decided to generate additional data because ... 
+The feature score method peformed better thatn min max scaler and hence it was used in the final preprocessing.
 
-To add more data to the the data set, I used the following techniques because ... 
+In order to build a robust model, the training data set should also be robust. Hence I augumented the entire training set and concatenated them to make double size data, which have images that are blurry, unsharp but also an equivalent preprocessed alias. The entire data set was final step was to normalise the entire dataset with feature score normalisation.
 
-Here is an example of an original image and an augmented image:
+The following is an example of an original image and an augmented image:
 
-![alt text][image3]
+![Augument][augument]
 
 The difference between the original data set and the augmented data set is the following ... 
 
