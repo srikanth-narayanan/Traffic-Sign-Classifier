@@ -9,6 +9,13 @@
 [rslt_50kph]: ./examples/results_50kph.png "Result Probability Speed Limit 50kph"
 [rslt_roadwork]: ./examples/results_road_Work.png "Result Probability Road Work"
 [rslt_General_Caut]: ./examples/result_generalcaution.png "Result Probability General Caution"
+[Grayscale]: ./examples/grayscale.png "Grayscale"
+[HSV]: ./examples/HSV.png "HSV"
+[YUV]: ./examples/YUV.png "YUV"
+[Rotate]: ./examples/Rotate.png "Rotate"
+[Enhance]: ./examples/Enhance.png "Enhance"
+[Translate]: ./examples/Translate.png "Translate"
+
 
 -> ![Introduction][image0] <-
 
@@ -62,7 +69,29 @@ As a first step, I decided to convert the images to grayscale because ...
 
 Here is an example of a traffic sign image before and after grayscaling.
 
-![alt text][image2]
+[Grayscale]: ./examples/grayscale.png "Grayscale"
+[HSV]: ./examples/HSV.png "HSV"
+[YUV]: ./examples/YUV.png "YUV"
+[Rotate]: ./examples/Rotate.png "Rotate"
+[Enhance]: ./examples/Enhance.png "Enhance"
+[Translate]: ./examples/Translate.png "Translate"
+
+![Gray Scale][Grayscale]
+
+
+![HSV Colour Space][HSV]
+
+
+![YUV Colour Space][YUV]
+
+
+![Rotate Colour Space][Rotate]
+
+
+![Enhance Colour Space][Enhance]
+
+
+![Translate Colour Space][Translate]
 
 As a last step, I normalized the image data because ...
 
